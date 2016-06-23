@@ -22,51 +22,56 @@
         android:layout_below="@+id/header"
         android:gravity="center">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ivAssetLabel"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/etServiceProvider"
-                android:hint="Service Provider Name"
-                android:inputType="textAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/etProjectCode"
-                android:hint="Project Code"
-                android:inputType="textAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/etServiceProviderContact"
-                android:hint="Service Provider Contact"
-                android:inputType="textAutoComplete"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <EditText
-                android:id="@+id/etPrintNo"
-                android:hint="Print Number"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/btnGenerate"
-                android:text="Generate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/btnPrint"
-                android:text="Print"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/ivAssetLabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/etServiceProvider"
+                    android:hint="Service Provider Name"
+                    android:inputType="textAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/etProjectCode"
+                    android:hint="Project Code"
+                    android:inputType="textAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/etServiceProviderContact"
+                    android:hint="Service Provider Contact"
+                    android:inputType="textAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/etPrintNo"
+                    android:hint="Print Number"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnGenerate"
+                    android:text="Generate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <Button
+                    android:id="@+id/btnPrint"
+                    android:text="Print"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
     <!-- ======= -->
 </RelativeLayout>
