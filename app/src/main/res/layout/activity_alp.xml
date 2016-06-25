@@ -51,7 +51,7 @@
                 <EditText
                     android:id="@+id/etServiceProviderContact"
                     android:hint="Service Provider Contact"
-                    android:inputType="textAutoComplete"
+                    android:inputType="phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <EditText

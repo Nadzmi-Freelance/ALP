@@ -3,6 +3,7 @@ package PROVIDER;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 
 /**
@@ -21,7 +22,7 @@ public class AssetLabelProvider {
             // draw the asset label on the asset label bitmap
             Paint text = new Paint(Paint.ANTI_ALIAS_FLAG);
             text.setColor(Color.BLACK);
-            text.setTextSize(25);
+            text.setTextSize(15);
 
             assetLabelCanvas.drawColor(Color.WHITE);
             assetLabelCanvas.drawBitmap(qrBitmap, (assetLabelImage.getWidth() / 20), (assetLabelImage.getHeight() / 10), null); // draw the qr code
@@ -32,5 +33,21 @@ public class AssetLabelProvider {
         } catch (Exception e) { e.printStackTrace(); }
 
         return assetLabelImage; // return the bitmap
+    }
+
+    public static Bitmap scaleAssetLabel(Bitmap assetLabel, int width, int height) {
+        Bitmap tempBitmap;
+        Matrix matrix;
+        float scaleWidth;
+        float scaleHeight;
+
+        matrix = new Matrix();
+        scaleWidth = ((float) width) / assetLabel.getWidth();
+        scaleHeight = ((float) height) / assetLabel.getHeight();
+
+        matrix.postScale(scaleWidth, scaleHeight);
+        tempBitmap = Bitmap.createBitmap(assetLabel, 0, 0, assetLabel.getWidth(), assetLabel.getHeight(), matrix, false);
+
+        return tempBitmap;
     }
 }
