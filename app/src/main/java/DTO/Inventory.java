@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 /**
  * Created by seladanghijau on 22/6/2016.
+ *
+ * to store all information regarding each individual inventory
  */
 public class Inventory {
     private String serviceProvider, serviceProviderContact;
@@ -13,6 +15,23 @@ public class Inventory {
 
     // constructor
     public Inventory() {
+        serviceProvider = "";
+        serviceProviderContact = "";
+        projectCode = "";
+        serialNo = "";
+        luhnCheck = "";
+        inventorySerialNo = "";
+        qrCode = null;
+        assetLabel = null;
+    }
+
+    public Inventory(String inventorySerialNo, String serviceProvider, String serviceProviderContact, String projectCode, String serialNo, String luhnCheck) {
+        this.inventorySerialNo = inventorySerialNo;
+        this.serviceProvider = serviceProvider;
+        this.serviceProviderContact = serviceProviderContact;
+        this.projectCode = projectCode;
+        this.serialNo = serialNo;
+        this.luhnCheck = luhnCheck;
     }
 
     public Inventory(String serviceProvider, String serviceProviderContact, String projectCode, String serialNo, String luhnCheck, String inventorySerialNo, Bitmap qrCode, Bitmap assetLabel) {

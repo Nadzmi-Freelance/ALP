@@ -1,7 +1,6 @@
 package com.example.seladanghijau.alp;
 
 import android.app.ProgressDialog;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,8 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.zxing.common.BitMatrix;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +18,6 @@ import DTO.Inventory;
 import PROVIDER.AssetLabelProvider;
 import PROVIDER.InventoryProvider;
 import PROVIDER.PrinterProvider;
-import PROVIDER.QRCodeProvider;
 
 public class ALP extends AppCompatActivity implements View.OnClickListener {
     // activity views
@@ -100,7 +96,7 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
             super.onPreExecute();
 
             pDialog = new ProgressDialog(ALP.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Generating label(s).\nPlease wait...");
             pDialog.setCancelable(false);
             pDialog.show();
 
@@ -114,23 +110,6 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
                 inventory.setLuhnCheck(InventoryProvider.getCheckDigit(inventory.getSerialNo())); // set check digit for luhn check code
                 inventory.setInventorySerialNo(inventory.getProjectCode() + inventory.getSerialNo() + inventory.getLuhnCheck()); // set inventory serial no
 
-                // create bitmap of qr code with inventory serial no
-                BitMatrix qrBitmatrix = QRCodeProvider.getQRBitmatrix(inventory.getInventorySerialNo(), AssetLabel.QR_WIDTH, AssetLabel.QR_HEIGHT, 0);
-                Bitmap qrBitmap = QRCodeProvider.getQRBitmap(qrBitmatrix);
-
-                // set qr code & asset label
-                inventory.setQrCode(qrBitmap);
-                inventory.setAssetLabel(
-                        AssetLabelProvider.getQRAssetLabel(
-                                qrBitmap,
-                                AssetLabel.LABEL_WIDTH,
-                                AssetLabel.LABEL_HEIGHT,
-                                inventory.getServiceProvider(),
-                                inventory.getServiceProviderContact(),
-                                inventory.getInventorySerialNo()
-                        )
-                );
-
                 // add inventory into arraylist
                 inventoryList.add(
                         new Inventory(
@@ -139,9 +118,7 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
                                 inventory.getProjectCode(),
                                 inventory.getSerialNo(),
                                 inventory.getLuhnCheck(),
-                                inventory.getInventorySerialNo(),
-                                inventory.getQrCode(),
-                                inventory.getAssetLabel()
+                                inventory.getInventorySerialNo()
                         )
                 );
             }
@@ -153,7 +130,17 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
             super.onPostExecute(result);
 
             // set preview for last generated inventory
-            ivAssetLabel.setImageBitmap(AssetLabelProvider.scaleAssetLabel(inventory.getAssetLabel(), AssetLabel.LABEL_WIDTH * 2, AssetLabel.LABEL_HEIGHT * 2)); // set the image view to be the asset label (for user to preview the asset label)
+            // set the image view to be the asset label (for user to preview the asset label)
+            ivAssetLabel.setImageBitmap(
+                    AssetLabelProvider.resizeAssetLabel(
+                            inventory,
+                            AssetLabel.QR_WIDTH,
+                            AssetLabel.QR_HEIGHT,
+                            AssetLabel.LABEL_WIDTH,
+                            AssetLabel.LABEL_HEIGHT,
+                            AssetLabel.FONT_SIZE
+                    )
+            );
 
             if(pDialog.isShowing())
                 pDialog.dismiss();

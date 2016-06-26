@@ -42,10 +42,10 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
         pdfDocument = new PrintedPdfDocument(context, newAttributes); // initialize the pdf document
 
         // initialize height and width of the doc
-        // pageHeight = newAttributes.getMediaSize().getHeightMils() / 1000 * 72;
-        // pageWidth = newAttributes.getMediaSize().getWidthMils() / 1000 * 72;
-        pageHeight = pageHeight / 1000 * 72;
-        pageWidth = pageWidth / 1000 * 72;
+        pageHeight = newAttributes.getMediaSize().getHeightMils() / 1000 * 72;
+        pageWidth = newAttributes.getMediaSize().getWidthMils() / 1000 * 72;
+        // pageHeight = pageHeight / 1000 * 72;
+        // pageWidth = pageWidth / 1000 * 72;
 
         /*
          * if user cancel print operation,
@@ -76,7 +76,7 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
     public void onWrite(PageRange[] pages, ParcelFileDescriptor destination, CancellationSignal cancellationSignal, WriteResultCallback callback) {
         for (int i = 0; i < totalpages; i++) {
             if (pageInRange(pages, i)) { // if page are within page range
-                PdfDocument.PageInfo newPage = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, i).create(); // create new page info
+                PdfDocument.PageInfo newPage = new PdfDocument.PageInfo.Builder(Math.abs(pageWidth), Math.abs(pageHeight), i).create(); // create new page info
                 PdfDocument.Page page = pdfDocument.startPage(newPage); // create new page based on the new page info
 
                 /*
@@ -132,36 +132,42 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
         for(int x=0 ; x<inventoryList.size() ; x++) {
             if(a < 2) {
                 canvas.drawBitmap(
-                        AssetLabelProvider.scaleAssetLabel(
-                                inventoryList.get(x).getAssetLabel(),
-                                AssetLabel.LABEL_WIDTH / 2,
-                                AssetLabel.LABEL_HEIGHT / 2
+                        AssetLabelProvider.resizeAssetLabel(
+                                inventoryList.get(x),
+                                AssetLabel.QR_WIDTH,
+                                AssetLabel.QR_HEIGHT,
+                                AssetLabel.LABEL_WIDTH,
+                                AssetLabel.LABEL_HEIGHT,
+                                AssetLabel.FONT_SIZE
                         ),
                         locX,
                         locY,
                         null
                 );
 
-                locX += AssetLabel.LABEL_WIDTH / 2;
+                locX += AssetLabel.LABEL_WIDTH;
                 a++;
             } else {
                 // move to next row
                 a = 0;
                 locX = 0;
-                locY += AssetLabel.LABEL_HEIGHT / 2;
+                locY += AssetLabel.LABEL_HEIGHT;
 
                 canvas.drawBitmap(
-                        AssetLabelProvider.scaleAssetLabel(
-                                inventoryList.get(x).getAssetLabel(),
-                                AssetLabel.LABEL_WIDTH / 2,
-                                AssetLabel.LABEL_HEIGHT / 2
+                        AssetLabelProvider.resizeAssetLabel(
+                                inventoryList.get(x),
+                                AssetLabel.QR_WIDTH,
+                                AssetLabel.QR_HEIGHT,
+                                AssetLabel.LABEL_WIDTH,
+                                AssetLabel.LABEL_HEIGHT,
+                                AssetLabel.FONT_SIZE
                         ),
                         locX,
                         locY,
                         null
                 );
 
-                locX += AssetLabel.LABEL_WIDTH / 2;
+                locX += AssetLabel.LABEL_WIDTH;
                 a++;
             }
         }

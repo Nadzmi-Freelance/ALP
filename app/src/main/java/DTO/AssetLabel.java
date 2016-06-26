@@ -4,6 +4,8 @@ import android.graphics.pdf.PdfDocument;
 
 /**
  * Created by seladanghijau on 22/6/2016.
+ *
+ * store important constant variables that are related to the asset labels
  */
 public class AssetLabel {
     /*
@@ -24,6 +26,7 @@ public class AssetLabel {
     public static final int COPY_PER_COLUMN_A4 = 11; // no of copy of asset label per column for A4 paper
     public static final int PAGE_WIDTH = 8160; // A4 width
     public static final int PAGE_HEIGHT = 10560; // A4 height
+    public static final int FONT_SIZE = 12; // font size for asset label
 
     public static final PdfDocument.PageInfo printPageInfo = new PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create();
 }
