@@ -11,6 +11,7 @@ import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
 import android.print.PrintDocumentInfo;
 import android.print.pdf.PrintedPdfDocument;
+import android.util.DisplayMetrics;
 
 import java.io.FileOutputStream;
 import java.util.List;
@@ -42,10 +43,8 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
         pdfDocument = new PrintedPdfDocument(context, newAttributes); // initialize the pdf document
 
         // initialize height and width of the doc
-        pageHeight = newAttributes.getMediaSize().getHeightMils() / 1000 * 72;
-        pageWidth = newAttributes.getMediaSize().getWidthMils() / 1000 * 72;
-        // pageHeight = pageHeight / 1000 * 72;
-        // pageWidth = pageWidth / 1000 * 72;
+        pageWidth = AssetLabel.PAGE_WIDTH;
+        pageHeight = AssetLabel.PAGE_HEIGHT;
 
         /*
          * if user cancel print operation,
@@ -130,7 +129,8 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
         canvas = page.getCanvas();
 
         for(int x=0 ; x<inventoryList.size() ; x++) {
-            if(a < 2) {
+            if(a < AssetLabel.COLUMNS_A4) { // if current row < 2
+                // draw the label
                 canvas.drawBitmap(
                         AssetLabelProvider.resizeAssetLabel(
                                 inventoryList.get(x),
@@ -153,6 +153,7 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
                 locX = 0;
                 locY += AssetLabel.LABEL_HEIGHT;
 
+                // draw the label
                 canvas.drawBitmap(
                         AssetLabelProvider.resizeAssetLabel(
                                 inventoryList.get(x),

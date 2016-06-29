@@ -64,12 +64,14 @@
                     android:id="@+id/btnGenerate"
                     android:text="Generate"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:translationZ="10dp"/>
                 <Button
                     android:id="@+id/btnPrint"
                     android:text="Print"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:translationZ="10dp"/>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

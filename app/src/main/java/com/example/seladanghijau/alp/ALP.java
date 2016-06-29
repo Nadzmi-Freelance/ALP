@@ -70,7 +70,7 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
                 String serviceProviderContact = etServiceProviderContact.getText().toString();
 
                 inventory = new Inventory();
-                inventory.setServiceProvider(serviceProvider);
+                inventory.setServiceProvider(AssetLabelProvider.setupServiceProviderString(serviceProvider));
                 inventory.setProjectCode(projectCode);
                 inventory.setServiceProviderContact(serviceProviderContact);
 
@@ -78,6 +78,7 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
                 break;
             case R.id.btnPrint:
                 new PrintAssetLabel().execute();
+
                 break;
         }
     }
@@ -95,8 +96,10 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
         protected void onPreExecute() {
             super.onPreExecute();
 
+            inventoryList = new ArrayList<>();
+
             pDialog = new ProgressDialog(ALP.this);
-            pDialog.setMessage("Generating label(s).\nPlease wait...");
+            pDialog.setMessage("Generating labels.\nPlease wait...");
             pDialog.setCancelable(false);
             pDialog.show();
 
@@ -134,11 +137,11 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
             ivAssetLabel.setImageBitmap(
                     AssetLabelProvider.resizeAssetLabel(
                             inventory,
-                            AssetLabel.QR_WIDTH,
-                            AssetLabel.QR_HEIGHT,
-                            AssetLabel.LABEL_WIDTH,
-                            AssetLabel.LABEL_HEIGHT,
-                            AssetLabel.FONT_SIZE
+                            AssetLabel.QR_WIDTH * 3,
+                            AssetLabel.QR_HEIGHT * 3,
+                            AssetLabel.LABEL_WIDTH * 3,
+                            AssetLabel.LABEL_HEIGHT * 3,
+                            AssetLabel.FONT_SIZE * 3
                     )
             );
 
@@ -154,6 +157,10 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
             PrinterProvider.printAssetLabel(ALP.this, inventoryList);
 
             return null;
+        }
+
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
         }
     }
     // ---------------------------------------------------------------------------------------------
