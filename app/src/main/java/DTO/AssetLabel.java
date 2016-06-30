@@ -28,6 +28,8 @@ public class AssetLabel {
     public static final int PAGE_WIDTH = 794; // A4 width
     public static final int PAGE_HEIGHT = 1123; // A4 height
     public static final int FONT_SIZE = 12; // font size for asset label
+    public static final int FONT_SPACING_NORMAL = 10;
+    public static final int FONT_SPACING_LARGE = 20;
 
     public static final PdfDocument.PageInfo printPageInfo = new PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create();
 }

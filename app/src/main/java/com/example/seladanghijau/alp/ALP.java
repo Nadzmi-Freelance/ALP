@@ -137,11 +137,12 @@ public class ALP extends AppCompatActivity implements View.OnClickListener {
             ivAssetLabel.setImageBitmap(
                     AssetLabelProvider.resizeAssetLabel(
                             inventory,
-                            AssetLabel.QR_WIDTH * 3,
-                            AssetLabel.QR_HEIGHT * 3,
-                            AssetLabel.LABEL_WIDTH * 3,
-                            AssetLabel.LABEL_HEIGHT * 3,
-                            AssetLabel.FONT_SIZE * 3
+                            AssetLabel.QR_WIDTH * 2,
+                            AssetLabel.QR_HEIGHT * 2,
+                            AssetLabel.LABEL_WIDTH * 2,
+                            AssetLabel.LABEL_HEIGHT * 2,
+                            AssetLabel.FONT_SIZE * 2,
+                            AssetLabel.FONT_SPACING_LARGE
                     )
             );
 

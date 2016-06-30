@@ -14,7 +14,7 @@ import DTO.Inventory;
  */
 public class AssetLabelProvider {
     // draw the Asset Label Tag & return it in bitmap
-    public static Bitmap getQRAssetLabel(Bitmap qrBitmap, int width, int height, int fontSize, String serviceProvider, String serviceProviderContact, String invSerialNo) {
+    public static Bitmap getQRAssetLabel(Bitmap qrBitmap, int width, int height, int fontSize, int fontSpacing, String serviceProvider, String serviceProviderContact, String invSerialNo) {
         String[] serviceProviderToken;
         Canvas assetLabelCanvas;
         Bitmap assetLabelImage = null;
@@ -35,7 +35,7 @@ public class AssetLabelProvider {
 
             // draw the service provider name
             if(serviceProviderToken.length > 2)
-                z = assetLabelImage.getHeight() / 4f;
+                z = assetLabelImage.getHeight() / 4;
             else
                 z = assetLabelImage.getHeight() / 3.5f;
 
@@ -43,21 +43,21 @@ public class AssetLabelProvider {
                 String tempString = serviceProviderToken[x];
 
                 if(x % 2 == 0) {
-                    z += 30;
+                    z += fontSpacing;
                     assetLabelCanvas.drawText(tempString, assetLabelImage.getWidth() / 2.5f, z, text);
                 } else
                     assetLabelCanvas.drawText(tempString, assetLabelImage.getWidth() / 2.5f, z, text);
             }
 
-            assetLabelCanvas.drawText(("Tel: " + serviceProviderContact), (assetLabelImage.getWidth() / 2.5f), (z + 40), text); // draw the service provider contact no
-            assetLabelCanvas.drawText(invSerialNo, (assetLabelImage.getWidth() / 2.5f), (z + 80), text); // draw the inventory serial no
+            assetLabelCanvas.drawText(("Tel: " + serviceProviderContact), (assetLabelImage.getWidth() / 2.5f), (z + fontSpacing), text); // draw the service provider contact no
+            assetLabelCanvas.drawText(invSerialNo, (assetLabelImage.getWidth() / 2.5f), (z + (fontSpacing * 2)), text); // draw the inventory serial no
             // ---------------------------------------------- //
         } catch (Exception e) { e.printStackTrace(); }
 
         return assetLabelImage; // return the bitmap
     }
 
-    public static Bitmap resizeAssetLabel(Inventory inventory, int qrWidth, int qrHeight, int labelWidth, int labelHeight, int fontSize) {
+    public static Bitmap resizeAssetLabel(Inventory inventory, int qrWidth, int qrHeight, int labelWidth, int labelHeight, int fontSize, int fontSpacing) {
         Inventory tempInventory = inventory;
 
         // setup new qr code bitmap
@@ -79,6 +79,7 @@ public class AssetLabelProvider {
                         labelWidth,
                         labelHeight,
                         fontSize,
+                        fontSpacing,
                         inventory.getServiceProvider(),
                         inventory.getServiceProviderContact(),
                         inventory.getInventorySerialNo()

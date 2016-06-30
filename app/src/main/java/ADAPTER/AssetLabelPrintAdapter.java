@@ -138,7 +138,8 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
                                 AssetLabel.QR_HEIGHT,
                                 AssetLabel.LABEL_WIDTH,
                                 AssetLabel.LABEL_HEIGHT,
-                                AssetLabel.FONT_SIZE
+                                AssetLabel.FONT_SIZE,
+                                AssetLabel.FONT_SPACING_NORMAL
                         ),
                         locX,
                         locY,
@@ -161,7 +162,8 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
                                 AssetLabel.QR_HEIGHT,
                                 AssetLabel.LABEL_WIDTH,
                                 AssetLabel.LABEL_HEIGHT,
-                                AssetLabel.FONT_SIZE
+                                AssetLabel.FONT_SIZE,
+                                AssetLabel.FONT_SPACING_NORMAL
                         ),
                         locX,
                         locY,
