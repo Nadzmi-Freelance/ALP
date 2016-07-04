@@ -125,7 +125,7 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
 
         a = 0;
         locX = 0;
-        locY = 0;
+        locY = AssetLabel.PAGE_TOP_MARGIN;
         canvas = page.getCanvas();
 
         for(int x=0 ; x<inventoryList.size() ; x++) {
@@ -139,9 +139,10 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
                                 AssetLabel.LABEL_WIDTH,
                                 AssetLabel.LABEL_HEIGHT,
                                 AssetLabel.FONT_SIZE,
-                                AssetLabel.FONT_SPACING_NORMAL
+                                AssetLabel.FONT_SPACING_NORMAL,
+                                AssetLabel.LABEL_TOP_MARGIN_NORMAL
                         ),
-                        locX,
+                        locX + AssetLabel.PAGE_SIDE_MARGIN,
                         locY,
                         null
                 );
@@ -163,9 +164,10 @@ public class AssetLabelPrintAdapter extends PrintDocumentAdapter {
                                 AssetLabel.LABEL_WIDTH,
                                 AssetLabel.LABEL_HEIGHT,
                                 AssetLabel.FONT_SIZE,
-                                AssetLabel.FONT_SPACING_NORMAL
+                                AssetLabel.FONT_SPACING_NORMAL,
+                                AssetLabel.LABEL_TOP_MARGIN_NORMAL
                         ),
-                        locX,
+                        locX + AssetLabel.PAGE_SIDE_MARGIN,
                         locY,
                         null
                 );

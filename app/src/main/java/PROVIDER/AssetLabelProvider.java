@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.util.Log;
 
+import DTO.AssetLabel;
 import DTO.Inventory;
 
 /**
@@ -14,7 +15,7 @@ import DTO.Inventory;
  */
 public class AssetLabelProvider {
     // draw the Asset Label Tag & return it in bitmap
-    public static Bitmap getQRAssetLabel(Bitmap qrBitmap, int width, int height, int fontSize, int fontSpacing, String serviceProvider, String serviceProviderContact, String invSerialNo) {
+    public static Bitmap getQRAssetLabel(Bitmap qrBitmap, int width, int height, int fontSize, int fontSpacing, float topMargin, String serviceProvider, String serviceProviderContact, String invSerialNo) {
         String[] serviceProviderToken;
         Canvas assetLabelCanvas;
         Bitmap assetLabelImage = null;
@@ -35,9 +36,9 @@ public class AssetLabelProvider {
 
             // draw the service provider name
             if(serviceProviderToken.length > 2)
-                z = assetLabelImage.getHeight() / 4;
+                z = assetLabelImage.getHeight() / topMargin;
             else
-                z = assetLabelImage.getHeight() / 3.5f;
+                z = assetLabelImage.getHeight() / topMargin;
 
             for(int x=0 ; x<serviceProviderToken.length ; x++) {
                 String tempString = serviceProviderToken[x];
@@ -57,7 +58,7 @@ public class AssetLabelProvider {
         return assetLabelImage; // return the bitmap
     }
 
-    public static Bitmap resizeAssetLabel(Inventory inventory, int qrWidth, int qrHeight, int labelWidth, int labelHeight, int fontSize, int fontSpacing) {
+    public static Bitmap resizeAssetLabel(Inventory inventory, int qrWidth, int qrHeight, int labelWidth, int labelHeight, int fontSize, int fontSpacing, float topMargin) {
         Inventory tempInventory = inventory;
 
         // setup new qr code bitmap
@@ -80,6 +81,7 @@ public class AssetLabelProvider {
                         labelHeight,
                         fontSize,
                         fontSpacing,
+                        topMargin,
                         inventory.getServiceProvider(),
                         inventory.getServiceProviderContact(),
                         inventory.getInventorySerialNo()

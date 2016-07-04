@@ -14,6 +14,7 @@ public class AssetLabel {
      * QR image = 20 x 20 mm
      * Asset Label image = 70 X 25 mm
      * page = 210mm X 297mm
+     * page top margin = 12mm;
      *
      * 76px = 20mm
      * 265px = 70mm
@@ -28,8 +29,12 @@ public class AssetLabel {
     public static final int PAGE_WIDTH = 794; // A4 width
     public static final int PAGE_HEIGHT = 1123; // A4 height
     public static final int FONT_SIZE = 12; // font size for asset label
-    public static final int FONT_SPACING_NORMAL = 10;
-    public static final int FONT_SPACING_LARGE = 20;
+    public static final int FONT_SPACING_NORMAL = 13; // font spacing for labels (small)
+    public static final int FONT_SPACING_LARGE = 35; // font spacing for labels (large)
+    public static final float LABEL_TOP_MARGIN_NORMAL = 5; // top margin of the label (small)
+    public static final float LABEL_TOP_MARGIN_LARGE = 3.5f; // top margin of label (large)
+    public static final int PAGE_TOP_MARGIN = 45; // page top margin
+    public static final int PAGE_SIDE_MARGIN = 15; // page left & right margin
 
     public static final PdfDocument.PageInfo printPageInfo = new PdfDocument.PageInfo.Builder(PAGE_WIDTH, PAGE_HEIGHT, 1).create();
 }

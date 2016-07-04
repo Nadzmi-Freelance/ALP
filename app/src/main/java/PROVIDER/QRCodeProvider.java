@@ -19,7 +19,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class QRCodeProvider {
     // encode inventory serial number into QR Code(BitMatrix)
-    public static BitMatrix getQRBitmatrix (String code, int width, int height, int margin) {
+    public static BitMatrix getQRBitmatrix(String code, int width, int height, int margin) {
         HashMap qrHint;
         QRCodeWriter qrWriter;
         BitMatrix qrBitMatrix = null;
@@ -37,7 +37,7 @@ public class QRCodeProvider {
     }
 
     // get the image of QR Code in Bitmap using Bitmatrix of QR Code
-    public static Bitmap getQRBitmap (BitMatrix qrBitmatrix) {
+    public static Bitmap getQRBitmap(BitMatrix qrBitmatrix) {
         Bitmap qrBitmap = null;
 
         try {
